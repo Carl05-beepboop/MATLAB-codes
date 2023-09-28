@@ -1,0 +1,38 @@
+% Na janela de comando, usamos filename = 'arquivo.netcdf' para reconhecer o arquivo com os dados de interesse
+
+filename = 'arquivo.nc4'
+
+% O ncdisp() vai nos dar todos os dados contidos no arquivo, incluindo variáveis, dimensões etc.
+
+ncdisp(filename) 
+
+% Leitura e definição de variáveis 
+
+variavel = ncread(filename, var)
+
+% Plotagem de gráficos 2D:
+
+pmap = pcolor(var1 (longitude), var2 (latitude), var3)
+pmap.EdgeAlpha=0
+colorbar
+load coast
+hold on
+plot(long, lat, cor)
+xlabel('Longitude [Graus Leste]')
+ylabel('Latitude[Graus Norte]')
+title('Titulo')
+
+% Script para plotagem gráfica 2D automática
+
+var1 = ncread(filename, 'gws_inst');
+var1 = rot90(fliplr(var1));
+lats = ncread(filename, 'lat');
+lons = ncread(filename, 'lon');
+pcolor(lons,lats,var1(:,:,1));
+shading flat
+load coast
+hold on
+plot(long,lat,'black')
+title('Percentil [%] de Umidade do Solo Superficial')
+xlabel('Longitude [Graus Leste]')
+ylabel('Latitude [Graus Norte]')
